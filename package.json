@@ -1,0 +1,22 @@
+{
+  "name": "trading-bot",
+  "version": "1.0.0",
+  "description": "Backend application that simulates a basic trading bot for a hypothetical stock market. The purpose of this bot is to execute trades based on predefined rules and conditions, while tracking its profit/loss and performance metrics.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Sahejad Kadivar",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
+}
