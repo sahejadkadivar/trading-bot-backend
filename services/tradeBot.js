@@ -1,7 +1,7 @@
 import Trade from "../models/tradeModel.js";
 
 
-const mockStockPrices = {
+export const mockStockPrices = {
   stockA: 100,
   stockB: 200,
 };
