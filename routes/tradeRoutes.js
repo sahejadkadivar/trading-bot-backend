@@ -21,13 +21,28 @@ const router = express.Router();
  * @swagger
  * /api/trades/execute:
  *   post:
- *     summary: Manually execute a trade
+ *     summary: Manually execute a trade for a given stock
  *     tags: [Trades]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - stock
+ *             properties:
+ *               stock:
+ *                 type: string
+ *                 example: stockA
+ *                 description: Symbol of the stock to trade
  *     responses:
  *       200:
- *         description: Trade executed
+ *         description: Trade executed successfully or no trade made
  *       400:
- *         description: Bad request
+ *         description: Stock is required
+ *       500:
+ *         description: Trade execution failed due to server error
  */
 router.post('/execute', authMiddleware, tradeController.execute);
 
@@ -60,7 +75,7 @@ router.get('/all', authMiddleware, tradeController.getAllTrades);
  *             properties:
  *               stockSymbol:
  *                 type: string
- *                 example: AAPL
+ *                 example: stockA
  *               tradeType:
  *                 type: string
  *                 enum: [buy, sell]

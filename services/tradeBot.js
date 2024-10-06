@@ -1,24 +1,31 @@
 import Trade from "../models/tradeModel.js";
 
-
 export const mockStockPrices = {
-  stockA: 100,
-  stockB: 200,
+  stockA: {
+    price: 100, // changed 'Price' to 'price'
+    buyThreshold: 98,
+    sellThreshold: 103
+  },
+  stockB: {
+    price: 200, // changed 'Price' to 'price'
+    buyThreshold: 196,
+    sellThreshold: 206
+  }
 };
 
 const priceChangeSimulator = () => {
   const randomPercentChange = () => (Math.random() * 4 - 2) / 100; // Random change between -2% and +2%
   Object.keys(mockStockPrices).forEach(stock => {
-    const currentPrice = mockStockPrices[stock];
+    const currentPrice = mockStockPrices[stock].price;
     const percentChange = randomPercentChange();
-    mockStockPrices[stock] = parseFloat((currentPrice * (1 + percentChange)).toFixed(2));
+    mockStockPrices[stock].price = parseFloat((currentPrice * (1 + percentChange)).toFixed(2));
   });
 };
 
 export const tradingStrategy = (stock) => {
-  const price = mockStockPrices[stock];
-  const buyThreshold = price * 0.98;
-  const sellThreshold = price * 1.03;
+  const price = mockStockPrices[stock].price;
+  const buyThreshold = mockStockPrices[stock].buyThreshold;
+  const sellThreshold = mockStockPrices[stock].sellThreshold;
 
   if (price <= buyThreshold) {
     return { action: 'buy', price };
@@ -27,7 +34,6 @@ export const tradingStrategy = (stock) => {
   }
   return null;
 };
-
 
 export const executeTrade = async (stock) => {
   const tradeDecision = tradingStrategy(stock);
@@ -81,7 +87,8 @@ export const startPriceMonitoring = () => {
   setInterval(() => {
     priceChangeSimulator();
     Object.keys(mockStockPrices).forEach(stock => {
-      console.log(`Current price of ${stock}: $${mockStockPrices[stock]}`);
+      // console.log(mockStockPrices[stock]); 
+      console.log(`Current price of ${stock}: $${mockStockPrices[stock].price}`);
       executeTrade(stock);
     });
   }, 10000); // Monitor every 10 seconds (adjust as needed)

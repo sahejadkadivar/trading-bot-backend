@@ -4,6 +4,12 @@ import { executeTrade } from '../services/tradeBot.js';
 class TradeController {
     async execute(req, res) {
         const { stock } = req.body;
+
+        // Validate if stock is provided
+        if (!stock) {
+            return res.status(400).json({ error: 'Stock is required' });
+        }
+
         try {
             const tradeResult = await executeTrade(stock);
             if (tradeResult) {

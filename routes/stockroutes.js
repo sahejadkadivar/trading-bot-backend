@@ -34,7 +34,7 @@ const router = express.Router();
  *                 properties:
  *                   symbol:
  *                     type: string
- *                     example: AAPL
+ *                     example: stockA
  *                   price:
  *                     type: number
  *                     example: 145.67
